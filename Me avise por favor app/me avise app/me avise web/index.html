@@ -1,0 +1,62 @@
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Me Avise por Favor</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+<body>
+    <div id="desktop-warning">
+        <div class="warning-content">
+            <i class="ri-smartphone-line"></i>
+            <h2>Por favor, acesse pelo celular</h2>
+            <p>Este aplicativo foi projetado para uso mobile.</p>
+        </div>
+    </div>
+
+    <div id="mobile-app">
+        <header>
+            <div class="logo">
+                <h1>Me Avise por Favor</h1>
+                <p>Mesmo um pouco esquecido, eu não confio na minha memória</p>
+            </div>
+        </header>
+
+        <main>
+            <section id="calendar-view">
+                <div class="calendar-header">
+                    <button id="prev-month"><i class="ri-arrow-left-line"></i></button>
+                    <h2 id="current-month">Dezembro 2023</h2>
+                    <button id="next-month"><i class="ri-arrow-right-line"></i></button>
+                </div>
+                <div id="calendar-grid"></div>
+            </section>
+
+            <section id="task-input">
+                <div class="input-container">
+                    <input type="text" id="task-title" placeholder="Título da tarefa">
+                    <input type="datetime-local" id="task-datetime">
+                    <input type="tel" id="phone-number" placeholder="Número para notificação">
+                    <textarea id="task-description" placeholder="Descrição da tarefa"></textarea>
+                    <button id="add-task">Adicionar Tarefa</button>
+                </div>
+            </section>
+
+            <section id="tasks-list">
+                <h3>Próximas Tarefas</h3>
+                <div id="upcoming-tasks"></div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="app-actions">
+                <button id="sync-tasks"><i class="ri-refresh-line"></i> Sincronizar</button>
+                <button id="settings"><i class="ri-settings-3-line"></i> Configurações</button>
+            </div>
+        </footer>
+    </div>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,378 @@
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2ecc71;
+    --bg-color: #f4f4f4;
+    --text-color: #333;
+    --surface-color: white;
+    --shadow-color: rgba(0,0,0,0.1);
+    
+    /* Refined dark mode variables */
+    --dark-primary-color: #4a90e2;     /* Brighter blue */
+    --dark-secondary-color: #4caf50;   /* Vibrant green */
+    --dark-bg-color: #121212;          /* Deep black-like background */
+    --dark-text-color: #e0e0e0;        /* Soft light gray */
+    --dark-surface-color: #1e1e1e;     /* Slightly lighter than background */
+    --dark-shadow-color: rgba(255,255,255,0.05);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body {
+    font-family: 'Inter', 'Arial', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    overscroll-behavior-y: none;
+}
+
+body.dark-mode {
+    background-color: var(--dark-bg-color);
+    color: var(--dark-text-color);
+}
+
+body.dark-mode * {
+    /* Ensure smoother dark mode transition for all elements */
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+#desktop-warning {
+    display: none;
+}
+
+@media (min-width: 769px) {
+    #mobile-app {
+        display: none;
+    }
+    
+    #desktop-warning {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #e74c3c;
+        color: white;
+        text-align: center;
+    }
+}
+
+#mobile-app {
+    max-width: 480px;
+    margin: 0 auto;
+    background-color: var(--surface-color);
+    min-height: 100vh;
+}
+
+body.dark-mode #mobile-app {
+    background-color: var(--dark-bg-color);
+}
+
+header {
+    position: relative;  
+    background-color: var(--primary-color);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;  
+    align-items: center;
+}
+
+body.dark-mode header {
+    background-color: var(--dark-surface-color);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.theme-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
+}
+
+.theme-toggle button {
+    background: rgba(255,255,255,0.2);  
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 50%;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.theme-toggle button:hover {
+    background: rgba(255,255,255,0.3);
+    transform: scale(1.1);
+}
+
+body.dark-mode .theme-toggle button {
+    background: rgba(255,255,255,0.1);
+    color: var(--dark-text-color);
+}
+
+body.dark-mode .theme-toggle button:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+header .logo h1 {
+  background: linear-gradient(45deg, 
+    #2196f3,    /* More intense blue */
+    #4caf50,    /* Vibrant green */
+    #ff5722,    /* Bright orange-red */
+    #9c27b0     /* Deep purple */
+  );
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradient-shift 5s ease infinite;
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.2);  /* Added subtle text shadow for depth */
+}
+
+header .logo p {
+  position: relative;
+  animation: subtle-float 3s ease-in-out infinite alternate;
+  opacity: 0.8;
+  font-style: italic;
+  font-size: 0.9rem;  /* Slightly larger */
+  color: rgba(255,255,255,0.9);  /* More visible */
+  letter-spacing: 0.5px;  /* Added letter spacing */
+}
+
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes subtle-float {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-5px);
+  }
+}
+
+body.dark-mode header .logo h1 {
+  background: linear-gradient(45deg, 
+    #1976d2,    /* Deeper blue */
+    #388e3c,    /* Rich green */
+    #d32f2f,    /* Strong red */
+    #7b1fa2     /* Vibrant purple */
+  );
+  background-size: 400% 400%;  
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradient-shift-dark 8s ease infinite;  
+  text-shadow: 0 3px 6px rgba(0,0,0,0.4);  /* More pronounced shadow */
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+body.dark-mode header .logo p {
+  color: rgba(255,255,255,0.8);
+  text-shadow: 0 0 10px rgba(255,255,255,0.2);
+  animation: subtle-float-dark 3s ease-in-out infinite alternate;
+  position: relative;
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+@keyframes gradient-shift-dark {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes subtle-float-dark {
+  from {
+    transform: translateY(0);
+    opacity: 0.6;
+  }
+  to {
+    transform: translateY(-7px);
+    opacity: 0.8;
+  }
+}
+
+main {
+    padding: 20px;
+}
+
+#calendar-view, #task-input, #tasks-list {
+    background-color: var(--surface-color);
+    border-radius: 15px;
+    box-shadow: 0 8px 15px var(--shadow-color);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+body.dark-mode #calendar-view, 
+body.dark-mode #task-input, 
+body.dark-mode #tasks-list {
+    background-color: var(--dark-surface-color);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+#calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    text-align: center;
+}
+
+#calendar-grid .calendar-day {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+#calendar-grid .calendar-day:hover {
+    background-color: rgba(52, 152, 219, 0.1);
+    transform: scale(1.05);
+}
+
+#calendar-grid .calendar-day.selected-day {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: bold;
+    transform: scale(1.1);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+#calendar-grid .calendar-day.has-tasks::after {
+    content: '•';
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: var(--secondary-color);
+    font-size: 1.5rem;
+}
+
+body.dark-mode #calendar-grid .calendar-day.selected-day {
+    background-color: var(--dark-primary-color);
+}
+
+#calendar-grid .empty-day {
+    background-color: transparent;
+    cursor: default;
+}
+
+.input-container input, 
+.input-container textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid var(--primary-color);
+    border-radius: 10px;
+    background-color: transparent;
+    color: inherit;
+}
+
+body.dark-mode input, 
+body.dark-mode textarea {
+    background-color: rgba(255,255,255,0.05);
+    border-color: rgba(255,255,255,0.2);
+    color: var(--dark-text-color);
+}
+
+#add-task {
+    width: 100%;
+    padding: 15px;
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.3s;
+}
+
+#add-task:active {
+    transform: scale(0.95);
+}
+
+body.dark-mode #add-task {
+    background-color: var(--dark-secondary-color);
+    color: white;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--surface-color);
+    box-shadow: 0 -4px 15px var(--shadow-color);
+    display: flex;
+    justify-content: space-around;
+    padding: 15px;
+}
+
+body.dark-mode footer {
+    background-color: var(--dark-surface-color);
+    box-shadow: 0 -4px 15px var(--dark-shadow-color);
+}
+
+.app-actions button {
+    background: none;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.app-actions i {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+body.dark-mode .app-actions i {
+    color: var(--dark-primary-color);
+}
+
+#install-app {
+    background: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background-color 0.3s ease;
+}
+
+#install-app:hover {
+    background-color: color-mix(in srgb, var(--secondary-color) 90%, white);
+}
+
+body.dark-mode #install-app {
+    background-color: var(--dark-secondary-color);
+}
