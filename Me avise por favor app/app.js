@@ -3,15 +3,24 @@ class TaskApp {
         this.currentDate = new Date();
         this.deferredPrompt = null;
         
+        // Bind initialize to ensure correct context
+        this.boundInitialize = this.initialize.bind(this);
+        
         // Ensure DOM is fully loaded before initialization
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', this.initialize.bind(this));
+            document.addEventListener('DOMContentLoaded', this.boundInitialize);
         } else {
             this.initialize();
         }
     }
 
     initialize() {
+        // Comprehensive button search
+        const installButton = 
+            document.querySelector('#install-app') || 
+            document.querySelector('#install-pwa-button') || 
+            document.getElementById('installButton');
+        
         this.initializeEventListeners();
         this.renderCalendar();
         this.initThemeToggle();
@@ -20,20 +29,32 @@ class TaskApp {
         this.initNotificationPermission();
         this.initOfflineSupport();
         
-        // Defer PWA installation setup to ensure DOM is ready
-        this.setupPWAInstallation();
+        // Setup PWA installation 
+        this.setupPWAInstallation(installButton);
     }
 
-    setupPWAInstallation() {
-        const installButton = document.getElementById('install-pwa-button');
-        
+    createInstallButton() {
+        const footer = document.querySelector('footer .app-actions');
+        if (footer) {
+            const installButton = document.createElement('button');
+            installButton.id = 'install-app';
+            installButton.innerHTML = `
+                <i class="ri-download-line"></i>
+                <span>Instalar App</span>
+            `;
+            footer.appendChild(installButton);
+            this.setupPWAInstallation(installButton);
+        }
+    }
+
+    setupPWAInstallation(installButton) {
         if (!installButton) {
             console.error('Installation button not found');
             return;
         }
 
-        // Hide install button initially
-        installButton.style.display = 'none';
+        // Ensure button is visible
+        installButton.style.display = 'flex';
 
         // Listen for beforeinstallprompt event
         window.addEventListener('beforeinstallprompt', (e) => {
@@ -94,15 +115,34 @@ class TaskApp {
         // Set initial theme
         if (savedTheme === 'dark') {
             document.body.classList.add('dark-mode');
+            this.updateThemeIcon(true);
+        } else {
+            this.updateThemeIcon(false);
         }
 
         themeSwitch.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.toggle('dark-mode');
             
             // Save theme preference
-            const currentTheme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+            const currentTheme = isDarkMode ? 'dark' : 'light';
             localStorage.setItem('theme', currentTheme);
+
+            // Update theme icon
+            this.updateThemeIcon(isDarkMode);
         });
+    }
+
+    updateThemeIcon(isDarkMode) {
+        const themeSwitch = document.getElementById('theme-switch');
+        const icon = themeSwitch.querySelector('i');
+        
+        if (isDarkMode) {
+            icon.classList.remove('ri-moon-line');
+            icon.classList.add('ri-sun-line');
+        } else {
+            icon.classList.remove('ri-sun-line');
+            icon.classList.add('ri-moon-line');
+        }
     }
 
     renderCalendar(date = new Date()) {
