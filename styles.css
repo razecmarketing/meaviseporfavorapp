@@ -1,0 +1,153 @@
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2ecc71;
+    --bg-color: #f4f4f4;
+    --text-color: #333;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+#desktop-warning {
+    display: none;
+}
+
+@media (min-width: 769px) {
+    #mobile-app {
+        display: none;
+    }
+    
+    #desktop-warning {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #e74c3c;
+        color: white;
+        text-align: center;
+    }
+
+    .warning-content {
+        max-width: 400px;
+        padding: 20px;
+    }
+
+    .warning-content i {
+        font-size: 5rem;
+        margin-bottom: 20px;
+    }
+}
+
+#mobile-app {
+    max-width: 480px;
+    margin: 0 auto;
+    background-color: white;
+    min-height: 100vh;
+}
+
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+header .logo p {
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+main {
+    padding: 20px;
+}
+
+#calendar-view {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+#calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+#task-input {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.input-container input, 
+.input-container textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#add-task {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#tasks-list {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    padding: 20px;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 -4px 6px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+}
+
+.app-actions button {
+    background: none;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.app-actions i {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
