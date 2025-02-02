@@ -1,0 +1,129 @@
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Me Avise por Favor App</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#3498db">
+    <link rel="apple-touch-icon" href="app-icon.png">
+    <meta name="description" content="Aplicativo para gerenciar tarefas e compromissos">
+    <style>
+        .app-text {
+            display: inline-block;
+            color: transparent; /* Make text transparent */
+            font-size: 0.7em;
+            vertical-align: super;
+            margin-left: 5px;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            transform: rotate(-5deg);
+            background-clip: text;
+            -webkit-background-clip: text;
+            background-image: linear-gradient(to right, transparent, transparent);
+        }
+
+        body.dark-mode .app-text {
+            background-image: linear-gradient(to right, transparent, transparent);
+        }
+
+        .app-text:hover {
+            transform: scale(1.2) rotate(0deg);
+            opacity: 1;
+        }
+        
+        .footer-copyright {
+            width: 100%;
+            text-align: center;
+            font-size: 0.7rem;
+            padding: 10px;
+            background-color: rgba(0,0,0,0.05);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body.dark-mode .footer-copyright {
+            background-color: rgba(255,255,255,0.05);
+            color: var(--dark-text-color);
+        }
+    </style>
+</head>
+<body>
+    <div id="desktop-warning">
+        <div class="warning-content">
+            <i class="ri-smartphone-line"></i>
+            <h2>Por favor, acesse pelo celular</h2>
+            <p>Este aplicativo foi projetado para uso mobile.</p>
+        </div>
+    </div>
+
+    <div id="mobile-app">
+        <header>
+            <div class="logo">
+                <h1>Me Avise por Favor <span class="app-text"> </span></h1>
+                <p>Mesmo um pouco esquecido, eu não confio na minha memória</p>
+            </div>
+            <div class="theme-toggle">
+                <button id="theme-switch" aria-label="Toggle Dark Mode">
+                    <i class="ri-moon-line"></i>
+                </button>
+            </div>
+        </header>
+
+        <main>
+            <section id="calendar-view">
+                <div class="calendar-header">
+                    <button id="prev-month"><i class="ri-arrow-left-line"></i></button>
+                    <h2 id="current-month">Dezembro 2023</h2>
+                    <button id="next-month"><i class="ri-arrow-right-line"></i></button>
+                </div>
+                <div id="calendar-grid"></div>
+            </section>
+
+            <section id="task-input">
+                <div class="input-container">
+                    <input type="text" id="task-title" placeholder="Título da tarefa" required>
+                    <input type="time" id="task-time" placeholder="Horário" required>
+                    <input type="tel" id="phone-number" placeholder="Número para notificação" pattern="[0-9]{11}" required>
+                    <textarea id="task-description" placeholder="Descrição da tarefa"></textarea>
+                    <button id="add-task">Adicionar Tarefa</button>
+                </div>
+            </section>
+
+            <section id="tasks-list">
+                <h3>Próximas Tarefas</h3>
+                <div id="upcoming-tasks"></div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="app-actions">
+                <button id="sync-tasks"><i class="ri-refresh-line"></i> Sincronizar</button>
+                <button id="settings"><i class="ri-settings-3-line"></i> Configurações</button>
+                <button id="install-pwa-button" style="display: none;"><i class="ri-download-line"></i> Instalar App</button>
+            </div>
+        </footer>
+        
+        <div class="footer-copyright">
+            Desenvolvido por Razec Marketing e Tecnologia - CEO - Cezar Cola 2025©
+        </div>
+    </div>
+
+    <script type="module" src="app.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('Service Worker registered successfully:', registration.scope);
+                    })
+                    .catch(error => {
+                        console.log('Service Worker registration failed:', error);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
