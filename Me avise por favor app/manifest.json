@@ -1,0 +1,26 @@
+{
+    "name": "Me Avise por Favor",
+    "short_name": "Me Avise",
+    "description": "Lembre-me dos meus compromissos",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#4a90e2",
+    "theme_color": "#4a90e2",
+    "icons": [
+        {
+            "src": "app-icon.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "app-icon.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "categories": ["productivity", "utilities"],
+    "lang": "pt-BR",
+    "orientation": "portrait",
+    "scope": "/",
+    "prefer_related_applications": false
+}

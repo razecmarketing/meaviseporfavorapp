@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Me Avise por Favor App</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#3498db">
+    <link rel="apple-touch-icon" href="app-icon.png">
+    <meta name="description" content="Aplicativo para gerenciar tarefas e compromissos">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+</head>
+<body>
+    <div id="desktop-warning">
+        <div class="warning-content">
+            <i class="ri-smartphone-line"></i>
+            <h2>Por favor, acesse pelo celular</h2>
+            <p>Este aplicativo foi projetado para uso mobile.</p>
+        </div>
+    </div>
+
+    <div id="mobile-app">
+        <header>
+            <div class="logo">
+                <h1>Me Avise <span class="app-text neon-glow">app</span></h1>
+                <p>Lembre-me dos meus compromissos</p>
+            </div>
+            <div class="theme-toggle">
+                <button id="theme-switch" aria-label="Alternar Tema">
+                    <i class="ri-contrast-2-line"></i>
+                </button>
+            </div>
+        </header>
+
+        <main>
+            <section id="calendar-view">
+                <div class="calendar-header">
+                    <button id="prev-month" aria-label="Mês Anterior"><i class="ri-arrow-left-line"></i></button>
+                    <h2 id="current-month">Selecione um Mês</h2>
+                    <button id="next-month" aria-label="Próximo Mês"><i class="ri-arrow-right-line"></i></button>
+                </div>
+                <div id="calendar-grid"></div>
+            </section>
+
+            <section id="task-input">
+                <div class="input-container">
+                    <input type="text" id="task-title" placeholder="Título da tarefa" required maxlength="50">
+                    <input type="time" id="task-time" placeholder="Horário" required>
+                    <input type="tel" id="phone-number" placeholder="Número para notificação" pattern="[0-9]{11}" required>
+                    <textarea id="task-description" placeholder="Descrição da tarefa" maxlength="200"></textarea>
+                    <button id="add-task">
+                        <i class="ri-add-circle-line"></i>
+                        Adicionar Tarefa
+                    </button>
+                </div>
+            </section>
+
+            <section id="appointments-section">
+                <h3>Compromissos Agendados</h3>
+                <div id="appointments-list" class="appointments-scroll"></div>
+            </section>
+
+            <section id="tasks-list">
+                <h3>Próximas Tarefas</h3>
+                <div id="upcoming-tasks" class="task-scroll"></div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="app-actions">
+                <button id="sync-tasks" aria-label="Sincronizar Tarefas">
+                    <i class="ri-loop-right-line"></i>
+                    <span>Sync</span>
+                </button>
+                <button id="settings" aria-label="Configurações">
+                    <i class="ri-settings-3-line"></i>
+                    <span>Config</span>
+                </button>
+                <button id="cancel-tasks" aria-label="Cancelar Compromissos">
+                    <i class="ri-calendar-close-line"></i>
+                    <span>Cancelar</span>
+                </button>
+                <button id="install-app" aria-label="Instalar Aplicativo">
+                    <i class="ri-download-cloud-line"></i>
+                    <span>Instalar</span>
+                </button>
+            </div>
+        </footer>
+    </div>
+
+    <div id="settings-panel" style="display: none;">
+        <h2>Configurações</h2>
+        <label>
+            <input type="checkbox" id="notification-toggle"> Ativar Notificações
+        </label>
+        <label>
+            <input type="checkbox" id="sound-toggle"> Ativar Sinal Sonoro
+        </label>
+        <label>
+            <input type="checkbox" id="reminder-messages-toggle"> Receber Mensagens de Lembrete
+        </label>
+        <div class="modal-actions">
+            <button id="sync-data">Sincronizar Dados</button>
+            <button id="reset-settings">Redefinir Configurações</button>
+            <button id="close-settings">Fechar</button>
+        </div>
+    </div>
+
+    <script type="module" src="app.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('Service Worker registered successfully:', registration.scope);
+                    })
+                    .catch(error => {
+                        console.log('Service Worker registration failed:', error);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
